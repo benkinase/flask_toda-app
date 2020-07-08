@@ -1,0 +1,70 @@
+{% extends 'layout.html' %} {% block head %}
+<title>Task List</title>
+{% endblock %} {% block body %}
+<!--field validation-->
+{% if message %}
+<p id="message" class="text-danger">{{message | safe}}</p>
+{% endif %}
+<!--field validation-->
+
+<div class="container shadow mt-5 px-3 py-5 bg-light position-relative">
+  <h1 class="text-center">Task Master</h1>
+  {% if tasks|length > 0 %}
+
+  <table class="table table-hover bg-info text-warning">
+    <thead class="h5">
+      <tr colspan="2">
+        <th scope="col">id</th>
+        <th scope="col">Task</th>
+        <th scope="col">Date</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="text-white">
+      {% for task in tasks%}
+      <tr colspan="2">
+        <th scope="row">{{task.id}}</th>
+        <td>{{task.content}}</td>
+        <td>{{task.date_created.date()}}</td>
+        <td>
+          <a href="/delete/{{task.id}}"
+            ><i class="fas fa-trash text-danger"></i
+          ></a>
+          <a type="button" href="/update/{{task.id}}"
+            ><i class="fas fa-pen ml-4 text-warning"></i
+          ></a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% else %}
+  <p class="text-center text-danger">Task table is empty</p>
+  {% endif %}
+  <form action="/" method="POST">
+    <div class="row">
+      <div class="col-sm-8">
+        <input
+          class="form-control"
+          name="task"
+          id="task"
+          type="text"
+          autofocus
+          placeholder="What is on your schedule?"
+        />
+      </div>
+      <div class="col-sm-4 text-right">
+        <button
+          type="submit"
+          class="btn btn-warning rounded-0"
+          style="width: 150px;"
+        >
+          Add new task
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+{% endblock %}
