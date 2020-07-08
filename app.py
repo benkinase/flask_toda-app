@@ -4,9 +4,9 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-app.config['ENV'] = 'development'
-app.config['DEBUG'] = True
-app.config['TESTING'] = True
+app.config['ENV'] = 'production'
+app.config['DEBUG'] = False
+app.config['TESTING'] = False
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///flask-crud.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
